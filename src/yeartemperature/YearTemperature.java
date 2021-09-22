@@ -1,5 +1,6 @@
 package YearTemperature;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,7 +27,7 @@ public class YearTemperature {
         months[10] = new int[30];
         months[11] = new int[31];
         
-        for (int i = 0; i < months.length; i++) {
+        for (int i = 0; i < months.length; i++) {       //Запонить температурами
             switch (i) {
                 case 0:
                 case 1:
@@ -59,15 +60,30 @@ public class YearTemperature {
             }
         }
         
-        for (int i = 0; i < months.length; i++) {
-            int midtemp = 0;
+        for (int i = 0; i < months.length; i++) {   //Средние температуры
+            double midtemp = 0;
             for (int j = 0; j < months[i].length; j++) {
                 midtemp += months[i][j];
             }
-            System.out.println("Средняя температура в " + monthsNames[i] + " " + midtemp/months[i].length + "°C");
+            DecimalFormat f = new DecimalFormat("##.00");
+            System.out.println("Средняя температура в " + monthsNames[i] + " была " + f.format(midtemp/months[i].length) + "°C");
         }
         
-        while (true) {
+        int maxtemp = 0;    //Поиск максимальной и минимальной температур
+        int mintemp = 0;
+        for (int i = 0; i < months.length; i++) {
+            for (int j = 0; j < months[i].length; j++) {
+                if (months[i][j] > maxtemp) {
+                    maxtemp = months[i][j];
+                }
+                if (months[i][j] < mintemp) {
+                    mintemp = months[i][j]; 
+                }
+            }
+        }
+//        System.out.println("Максимальная температура в " + maxtemp + "°C" + " была " + months[]);
+        
+        while (true) {                              //Температуры от пользователя
             System.out.print("Введите день --> ");
             int day = scanner.nextInt();
             System.out.print("Введите месяц --> ");
@@ -75,5 +91,6 @@ public class YearTemperature {
 
             System.out.println(day + " " + monthsNames[month-1] + " температура была " + months[month-1][day-1] + "°C");
         }
+        
     }
 }
