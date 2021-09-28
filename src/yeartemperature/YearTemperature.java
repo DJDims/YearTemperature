@@ -70,18 +70,28 @@ public class YearTemperature {
         }
         
         int maxtemp = 0;    //Поиск максимальной и минимальной температур
+        int maxtempday = 0;
+        int maxtempmonth = 0;
         int mintemp = 0;
+        int mintempday = 0;
+        int mintempmonth = 0;
+        
         for (int i = 0; i < months.length; i++) {
             for (int j = 0; j < months[i].length; j++) {
                 if (months[i][j] > maxtemp) {
                     maxtemp = months[i][j];
+                    maxtempday = j;
+                    maxtempmonth = i;
                 }
                 if (months[i][j] < mintemp) {
-                    mintemp = months[i][j]; 
+                    mintemp = months[i][j];
+                    mintempday = j;
+                    mintempmonth = i;
                 }
             }
         }
-//        System.out.println("Максимальная температура в " + maxtemp + "°C" + " была " + months[]);
+       System.out.println("Максимальная температура в " + maxtemp + "°C" + " была " + maxtempday + " " + monthsNames[maxtempmonth]);
+       System.out.println("Минимальная температура в " + mintemp + "°C" + " была " + mintempday + " " + monthsNames[mintempmonth]);
         
         while (true) {                              //Температуры от пользователя
             System.out.print("Введите день --> ");
